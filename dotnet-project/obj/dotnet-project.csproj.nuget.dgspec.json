@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\dotnet-project.csproj": {}
+    "c:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\dotnet-project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\dotnet-project.csproj": {
+    "c:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\dotnet-project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\dotnet-project.csproj",
+        "projectUniqueName": "c:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\dotnet-project.csproj",
         "projectName": "dotnet-project",
-        "projectPath": "C:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\dotnet-project.csproj",
+        "projectPath": "c:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\dotnet-project.csproj",
         "packagesPath": "C:\\Users\\mohan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\obj\\",
+        "outputPath": "c:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -24,7 +24,6 @@
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -42,6 +41,16 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.0.123, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.10, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
