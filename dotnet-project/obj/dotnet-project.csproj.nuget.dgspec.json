@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\dotnet-project.csproj": {}
+    "C:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\dotnet-project.csproj": {}
   },
   "projects": {
-    "c:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\dotnet-project.csproj": {
+    "C:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\dotnet-project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\dotnet-project.csproj",
+        "projectUniqueName": "C:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\dotnet-project.csproj",
         "projectName": "dotnet-project",
-        "projectPath": "c:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\dotnet-project.csproj",
+        "projectPath": "C:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\dotnet-project.csproj",
         "packagesPath": "C:\\Users\\mohan\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\obj\\",
+        "outputPath": "C:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -24,6 +24,7 @@
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
