@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ZgZI8jnShqXjJKhOS+e8KAWoPUpXjaqkVCdfMQ1PLis=",
+  "Hash": "UbmL8jWm1ncy0K7kGQBhN5oCVNj3Xev+Zp88BLGIsDI=",
   "Source": "dotnet-project",
   "BasePath": "_content/dotnet-project",
   "Mode": "Default",
@@ -51,6 +51,23 @@
       "OriginalItemSpec": "C:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\dotnet-project.bundle.scp.css"
     },
     {
+      "Identity": "C:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\wwwroot\\css\\bootstrap.css",
+      "SourceId": "dotnet-project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\wwwroot\\",
+      "BasePath": "_content/dotnet-project",
+      "RelativePath": "css/bootstrap.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\bootstrap.css"
+    },
+    {
       "Identity": "C:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\wwwroot\\css\\site.css",
       "SourceId": "dotnet-project",
       "SourceType": "Discovered",
@@ -68,6 +85,23 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
+      "Identity": "C:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\wwwroot\\css\\styles.css",
+      "SourceId": "dotnet-project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\wwwroot\\",
+      "BasePath": "_content/dotnet-project",
+      "RelativePath": "css/styles.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\styles.css"
+    },
+    {
       "Identity": "C:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\wwwroot\\favicon.ico",
       "SourceId": "dotnet-project",
       "SourceType": "Discovered",
@@ -83,6 +117,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\wwwroot\\js\\scripts.js",
+      "SourceId": "dotnet-project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\wwwroot\\",
+      "BasePath": "_content/dotnet-project",
+      "RelativePath": "js/scripts.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\scripts.js"
     },
     {
       "Identity": "C:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\wwwroot\\js\\site.js",
