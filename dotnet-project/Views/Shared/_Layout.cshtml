@@ -24,11 +24,11 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        @* <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li> *@
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Index">Products</a>
+                        </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">Shop</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#!">All Products</a></li>
                                 <li><hr class="dropdown-divider" /></li>
@@ -37,6 +37,12 @@
                             </ul>
                         </li>
                     </ul>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="#!">Sign Up</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">Log In</a></li>
+                    </ul>
+                    </div>
                     <form class="d-flex">
                         <button class="btn btn-outline-info" type="submit">
                             <i class="bi-cart-fill me-1"></i>
@@ -48,7 +54,7 @@
             </div>
         </nav>
         <!-- Header-->
-        @* <header class="bg-info py-5">
+        <header class="bg-black py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
                     <h1 class="display-4 fw-bolder">Shop to your heart's content</h1>
@@ -56,11 +62,11 @@
                 </div>
             </div>
         </header>
-    <div class="container"> *@
+    <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
-    @* </div> *@
+    </div>
 
     <!-- Footer-->
     <footer class="py-4 bg-warning mt-auto">
