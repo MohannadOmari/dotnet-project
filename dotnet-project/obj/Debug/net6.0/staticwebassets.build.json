@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "2W8JLnBvpmbMX2fjHuAEU05a6ynKZMrM7CBVBNOdYeY=",
+  "Hash": "uxyZ24L2mzKMdV7QGD0n9xTh7RC8i2kUXt/tf0udzUY=",
   "Source": "dotnet-project",
   "BasePath": "_content/dotnet-project",
   "Mode": "Default",
@@ -119,6 +119,23 @@
       "OriginalItemSpec": "wwwroot\\assets\\img\\03.jpg"
     },
     {
+      "Identity": "C:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\wwwroot\\assets\\img\\3ajwvs33hmt21.jpg",
+      "SourceId": "dotnet-project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\wwwroot\\",
+      "BasePath": "_content/dotnet-project",
+      "RelativePath": "assets/img/3ajwvs33hmt21.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\img\\3ajwvs33hmt21.jpg"
+    },
+    {
       "Identity": "C:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\wwwroot\\assets\\img\\angry_pepe.jpg",
       "SourceId": "dotnet-project",
       "SourceType": "Discovered",
@@ -134,6 +151,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\img\\angry_pepe.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\wwwroot\\assets\\img\\BLOB-Sunglasses.gif",
+      "SourceId": "dotnet-project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\wwwroot\\",
+      "BasePath": "_content/dotnet-project",
+      "RelativePath": "assets/img/BLOB-Sunglasses.gif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\img\\BLOB-Sunglasses.gif"
+    },
+    {
+      "Identity": "C:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\wwwroot\\assets\\img\\BLOB.gif",
+      "SourceId": "dotnet-project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\wwwroot\\",
+      "BasePath": "_content/dotnet-project",
+      "RelativePath": "assets/img/BLOB.gif",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\img\\BLOB.gif"
     },
     {
       "Identity": "C:\\Users\\mohan\\Desktop\\umniah-project\\dotnet-project\\wwwroot\\css\\bootstrap.css",
