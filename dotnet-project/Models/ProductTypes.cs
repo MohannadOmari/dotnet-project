@@ -9,6 +9,6 @@ namespace dotnet_project.Models
     {
         public int Id { get; set; }
         public int ProductId { get; set; }
-        public string ProductType { get; set; }
+        public string? ProductType { get; set; }
     }
 }
