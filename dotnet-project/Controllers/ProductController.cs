@@ -33,7 +33,7 @@ namespace dotnet_project.Controllers
             }
         }
 
-        [HttpGet("")]
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
@@ -50,6 +50,27 @@ namespace dotnet_project.Controllers
                 return View(list);
             }
 
+        }
+
+        [HttpGet("AddProduct")]
+        public IActionResult AddProduct()
+        {
+            return View();
+        }
+
+        [HttpPost("AddProduct")]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddProduct(Products product)
+        {
+            using (IDbConnection dbconnection = Connection)
+            {
+                string Query = @"INSERT INTO Products (ProductName, Quantity, Price, SellerId, ProductTypeId, CreatedAt)" +
+                "VALUES ('" + product.ProductName + "','" + product.Quantity + "','" + product.Price + "', 1, 1,'" + product.CreatedAt + "')";
+                dbconnection.Open();
+                var test = dbconnection.Execute(Query);
+                return RedirectToAction("Index");
+            }
+            
         }
     }
 }
