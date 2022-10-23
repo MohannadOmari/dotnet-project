@@ -1,0 +1,52 @@
+@model Users
+@{
+    Layout = "~/Views/Shared/_LayoutWithoutHeader.cshtml";
+}
+
+<div id="containers" class="container mt-5 w-50 bg-white align-items-center">
+	<h2 id="heading" class="text-center text-grey">Sign up</h2>
+	<form method="post">
+		<div class="align-items-center">
+            <label asp-for="FullName" class="">Full Name</label>
+			<input asp-for="FullName" class="form-control"/>
+		</div>
+
+		<div class="align-items-center">
+            <label asp-for="Email">Email</label>
+			<input asp-for="Email" class="form-control"/>
+		</div>
+
+		<div class="align-items-center">
+            <label asp-for="Password">Password</label>
+			<input asp-for="Password" class="form-control" type="password"/>
+		</div>
+
+		<div class="align-items-center">
+			<div class="">
+                <label asp-for="Gender">Gender</label>
+			    <input asp-for="Gender" class="form-control"/>
+			</div>
+		</div>
+        <div class="align-items-center">
+			<div class="">
+                <label asp-for="Address">Address</label>
+			    <input asp-for="Address" class="form-control"/>
+			</div>
+		</div>
+        <div class="align-items-center">
+			<div class="">
+                <label asp-for="BirthDate">Birth Date</label>
+			    <input asp-for="BirthDate" class="form-control" type="date"/>
+			</div>
+		</div>
+        @* <div class="align-items-center">
+			<div class="">
+                <label asp-for="UserTypeId">Type of User</label>
+			    <input asp-for="UserTypeId" class="form-control"/>
+			</div>
+		</div> *@
+		<div id="submit-button" class="text-center">
+			<button type="submit" class="btn btn-primary mt-3">Register</button>
+		</div>
+	</form>
+</div>
