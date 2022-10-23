@@ -9,6 +9,5 @@ namespace dotnet_project.Models
     {
         public int Id { get; set; }
         public string? Type { get; set; }
-        public int UserId { get; set; }
     }
 }

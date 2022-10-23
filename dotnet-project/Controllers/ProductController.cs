@@ -11,46 +11,53 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
 
-namespace dotnet_project.Controllers
+namespace dotnet_project.Controllers;
+
+[Route("[controller]")]
+public class ProductController : Controller
 {
-    [Route("[controller]")]
-    public class ProductController : Controller
+    private readonly ILogger<ProductController> _logger;
+    private readonly IProductRepository _productRepo;
+
+    public ProductController(ILogger<ProductController> logger, IProductRepository productRepo)
     {
-        private readonly ILogger<ProductController> _logger;
-        private readonly IProductRepository _productRepo;
+        _logger = logger;
+        _productRepo = productRepo;
+    }
 
-        public ProductController(ILogger<ProductController> logger, IProductRepository productRepo)
+    [HttpGet]
+    public async Task<IActionResult> Index()
+    {
+        try
         {
-            _logger = logger;
-            _productRepo = productRepo;
+            var products = await _productRepo.GetProducts();
+            return View(products);
         }
-
-        [HttpGet]
-        public async Task<IActionResult> Index()
+        catch (Exception ex)
         {
-            try
-            {
-                var products = await _productRepo.GetProducts();
-                return View(products);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+            return StatusCode(500, ex.Message);
         }
+    }
 
-        [HttpGet("AddProduct")]
-        public IActionResult AddProduct()
-        {
-            return View();
-        }
+    [HttpGet("AddProduct")]
+    public IActionResult AddProduct()
+    {
+        return View();
+    }
 
-        [HttpPost("AddProduct")]
-        [ValidateAntiForgeryToken]
-        public IActionResult AddProduct(Products product)
+    [HttpPost("AddProduct")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> AddProduct(Products product)
+    {
+        try
         {
-            var addedProduct = _productRepo.AddProduct(product);
+            await _productRepo.AddProduct(product);
             return RedirectToAction("Index");
         }
+        catch(Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+        
     }
 }
