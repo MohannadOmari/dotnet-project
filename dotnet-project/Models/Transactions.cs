@@ -11,6 +11,6 @@ namespace dotnet_project.Models
         public int BuyerId { get; set; }
         public int SellerId { get; set; }
         public int ProductId { get; set; }
-        public DateTime TransactionDate { get; set; }
+        public DateTime TransactionDate { get; set; } = DateTime.Now;
     }
 }

@@ -15,7 +15,7 @@ namespace dotnet_project.Models
         public string? Address { get; set; }
         public DateTime BirthDate { get; set; }
         public int UserTypeId { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; }
         public string? isActive { get; set; }
     }
