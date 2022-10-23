@@ -1,8 +1,13 @@
+using dotnet_project.Context;
+using dotnet_project.Repository;
+using dotnet_project.Repository.Interface;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Configuration.GetConnectionString("DatabaseConnection");
+builder.Services.AddSingleton<DapperContext>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 var app = builder.Build();
 

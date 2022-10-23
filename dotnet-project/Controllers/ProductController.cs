@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using dotnet_project.Models;
+using dotnet_project.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
@@ -16,40 +17,26 @@ namespace dotnet_project.Controllers
     public class ProductController : Controller
     {
         private readonly ILogger<ProductController> _logger;
-        private readonly IConfiguration _configuration;
+        private readonly IProductRepository _productRepo;
 
-        public ProductController(ILogger<ProductController> logger, IConfiguration configuration)
+        public ProductController(ILogger<ProductController> logger, IProductRepository productRepo)
         {
             _logger = logger;
-            _configuration = configuration;
-        }
-
-        public IDbConnection Connection
-        {
-            get
-            {
-                //System.Configuration.ConfigurationManager.AppSettings["ConnectionString"]
-                return new SqlConnection(_configuration.GetConnectionString("DatabaseConnection"));
-            }
+            _productRepo = productRepo;
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
-        }
-
-        [HttpGet("DapperTest")]
-        public IActionResult DapperTest()
-        {
-            using (IDbConnection dbconnection = Connection)
+            try
             {
-                string sQuery = @"select * from Products";
-                dbconnection.Open();
-                var list = dbconnection.Query<Products>(sQuery).ToList();
-                return View(list);
+                var products = await _productRepo.GetProducts();
+                return View(products);
             }
-
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         [HttpGet("AddProduct")]
@@ -62,15 +49,8 @@ namespace dotnet_project.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult AddProduct(Products product)
         {
-            using (IDbConnection dbconnection = Connection)
-            {
-                string Query = @"INSERT INTO Products (ProductName, Quantity, Price, SellerId, ProductTypeId, CreatedAt)" +
-                "VALUES ('" + product.ProductName + "','" + product.Quantity + "','" + product.Price + "', 1, 1,'" + product.CreatedAt + "')";
-                dbconnection.Open();
-                var test = dbconnection.Execute(Query);
-                return RedirectToAction("Index");
-            }
-            
+            var addedProduct = _productRepo.AddProduct(product);
+            return RedirectToAction("Index");
         }
     }
 }
