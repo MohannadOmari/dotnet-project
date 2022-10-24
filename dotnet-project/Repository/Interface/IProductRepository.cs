@@ -7,5 +7,6 @@ namespace dotnet_project.Repository.Interface
     {
         public Task<IEnumerable<Products>> GetProducts();
         public Task AddProduct(Products product);
+        public Task<Products> GetProductById(int id);
     }
 }

@@ -60,4 +60,19 @@ public class ProductController : Controller
         }
         
     }
+
+    [HttpGet("{Id}")]
+    public async Task<IActionResult> GetProduct(int id)
+    {
+        try
+        {
+            var product = await _productRepo.GetProductById(id);
+            if (product == null){return NotFound();}
+            return View(product);
+        }
+        catch(Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
 }

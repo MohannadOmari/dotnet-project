@@ -24,6 +24,16 @@ namespace dotnet_project.Repository
             }
         }
 
+        public async Task<Products> GetProductById(int id)
+        {
+            var query = "SELECT * FROM Products WHERE Id = @Id";
+            using(var connection = _context.CreateConnection())
+            {
+                var product = await connection.QuerySingleOrDefaultAsync<Products>(query, new { id });
+                return product;
+            }
+        }
+
         public async Task AddProduct(Products product)
         {
             var query = "INSERT INTO Products (ProductName, Quantity, Price, SellerId, CreatedAt, SoldAt, ProductTypeId)" 
