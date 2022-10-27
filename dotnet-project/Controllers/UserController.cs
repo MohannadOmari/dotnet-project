@@ -34,8 +34,15 @@ namespace dotnet_project.Controllers
         {
             try
             {
-                await _userRepo.GetUser(Email, Password);
-                return Redirect("/");
+                bool loggedIn = await _userRepo.GetUser(Email, Password);
+                if (loggedIn)
+                {
+                    return Redirect("/");
+                }
+                else
+                {
+                    return View();
+                }
             }
             catch(Exception ex)
             {

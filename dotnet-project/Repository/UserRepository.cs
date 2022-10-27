@@ -44,7 +44,7 @@ namespace dotnet_project.Repository
             }
         }
 
-        public async Task GetUser(string email, string password)
+        public async Task<bool> GetUser(string email, string password)
         {
             var query = "SELECT Password FROM Users WHERE Email = @Email AND isActive = 'Yes'";
             var Email = email;
@@ -57,16 +57,16 @@ namespace dotnet_project.Repository
                     bool passwordMatch = BCrypt.Net.BCrypt.Verify(password, hashedPassword);
                     if (passwordMatch)
                     {
-                        Console.WriteLine("User Logged in");
+                        return true;
                     }
                     else
                     {
-                        Console.WriteLine("Wrong Password");
+                        return false;
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Wrong email");
+                    return false;
                 }
             }
 

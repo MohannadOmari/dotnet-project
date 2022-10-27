@@ -36,17 +36,18 @@ namespace dotnet_project.Repository
 
         public async Task AddProduct(Products product)
         {
-            var query = "INSERT INTO Products (ProductName, Quantity, Price, SellerId, CreatedAt, SoldAt, ProductTypeId)" 
-                + "VALUES (@ProductName, @Quantity, @Price, @SellerId, @CreatedAt, @SoldAt, @ProductTypeId)";
+            var query = "INSERT INTO Products (ProductName, Quantity, Price, SellerId, CreatedAt, SoldAt, ProductTypeId, ProductDescription)" 
+                + "VALUES (@ProductName, @Quantity, @Price, @SellerId, @CreatedAt, @SoldAt, @ProductTypeId, @ProductDescription)";
 
             var parameters = new DynamicParameters();
-            parameters.Add("ProductName", product.ProductName, System.Data.DbType.String);
-            parameters.Add("Quantity", product.Quantity, System.Data.DbType.Int32);
-            parameters.Add("Price", product.Price, System.Data.DbType.Int32);
-            parameters.Add("SellerId", product.SellerId, System.Data.DbType.Int32);
-            parameters.Add("CreatedAt", product.CreatedAt, System.Data.DbType.DateTime);
-            parameters.Add("SoldAt", null, System.Data.DbType.Int32);
-            parameters.Add("ProductTypeId", product.ProductTypeId, System.Data.DbType.Int32);
+            parameters.Add("ProductName", product.ProductName);
+            parameters.Add("Quantity", product.Quantity);
+            parameters.Add("Price", product.Price);
+            parameters.Add("SellerId", product.SellerId);
+            parameters.Add("CreatedAt", product.CreatedAt);
+            parameters.Add("SoldAt", null);
+            parameters.Add("ProductTypeId", product.ProductTypeId);
+            parameters.Add("ProductDescription", product.ProductDescription);
 
             using(var connection = _context.CreateConnection())
             {
