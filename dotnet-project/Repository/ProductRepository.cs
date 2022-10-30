@@ -14,6 +14,7 @@ namespace dotnet_project.Repository
             _context = context;
         }
 
+        // used to retrieve all products
         public async Task<IEnumerable<Products>> GetProducts()
         {
             var query = "SELECT * FROM Products";
@@ -24,6 +25,7 @@ namespace dotnet_project.Repository
             }
         }
 
+        // used to get one product using its Id
         public async Task<Products> GetProductById(int id)
         {
             var query = "SELECT * FROM Products WHERE Id = @Id";
@@ -34,6 +36,7 @@ namespace dotnet_project.Repository
             }
         }
 
+        // used to add products into the database
         public async Task AddProduct(Products product)
         {
             var query = "INSERT INTO Products (ProductName, Quantity, Price, SellerId, CreatedAt, SoldAt, ProductTypeId, ProductDescription)" 

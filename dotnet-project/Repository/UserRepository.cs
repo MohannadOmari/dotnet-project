@@ -16,10 +16,13 @@ namespace dotnet_project.Repository
             _context = context;
         }
 
+        // adding user for register
         public async Task AddUser(Users user)
         {
+            // check if email exists
             var query = "SELECT 1 FROM Users WHERE Email = @Email";
             var Email = user.Email;
+            // encrypt password
             string Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
             using (var connection = _context.CreateConnection())
             {
@@ -44,6 +47,7 @@ namespace dotnet_project.Repository
             }
         }
 
+        // Get user for login
         public async Task<bool> GetUser(string email, string password)
         {
             var query = "SELECT Password FROM Users WHERE Email = @Email AND isActive = 'Yes'";
