@@ -38,5 +38,9 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Index">Back to List</a>
+    @if (ViewBag.userType == 2)
+    {
+        <a asp-controller="Product" asp-action="UpdateProduct" class="btn btn-success">Update</a>
+    }
+    <a asp-action="Index" class="btn btn-info">Back to Products</a>
 </div>
