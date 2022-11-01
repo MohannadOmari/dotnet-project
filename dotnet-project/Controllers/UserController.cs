@@ -22,21 +22,28 @@ namespace dotnet_project.Controllers
             _userRepo = userRepo;
         }
 
+        #region Login
         [HttpGet("/Login")]
         public IActionResult Login()
         {
+            ViewBag.userId = HttpContext.Session.GetInt32("UserId");
+            ViewBag.userType = HttpContext.Session.GetInt32("UserType");
             return View();
         }
 
         [HttpPost("/Login")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(string Email, string Password) //add functionality
+        public async Task<IActionResult> Login(Users user) //add functionality
         {
             try
             {
-                bool loggedIn = await _userRepo.GetUser(Email, Password);
-                if (loggedIn)
+                Users? loggedIn = await _userRepo.GetUser(user);
+                if (loggedIn != null)
                 {
+                    await HttpContext.Session.LoadAsync();
+                    HttpContext.Session.SetInt32("UserId", loggedIn.Id);
+                    HttpContext.Session.SetInt32("UserType", loggedIn.UserTypeId);
+                    await HttpContext.Session.CommitAsync();
                     return Redirect("/");
                 }
                 else
@@ -49,10 +56,14 @@ namespace dotnet_project.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+        #endregion
 
+        #region Register
         [HttpGet("/Register")]
         public IActionResult Register()
         {
+            ViewBag.userId = HttpContext.Session.GetInt32("UserId");
+            ViewBag.userType = HttpContext.Session.GetInt32("UserType");
             return View();
         }
 
@@ -69,6 +80,42 @@ namespace dotnet_project.Controllers
             {
                 return StatusCode(500, ex.Message);
             }
+        }
+        #endregion
+
+        #region Profile
+        [HttpGet("/Profile")]
+        public async Task<IActionResult> Profile()
+        {
+            ViewBag.userId = HttpContext.Session.GetInt32("UserId");
+            ViewBag.userType = HttpContext.Session.GetInt32("UserType");
+            int? id = HttpContext.Session.GetInt32("UserId");
+            Users user = await _userRepo.GetUserById((int)id);
+            return View(user);
+        }
+
+        [HttpGet("Profile/Edit")]
+        public IActionResult EditProfile()
+        {
+            ViewBag.userId = HttpContext.Session.GetInt32("UserId");
+            ViewBag.userType = HttpContext.Session.GetInt32("UserType");
+            return View();
+        }
+
+        [HttpPost("Profile/Edit")]
+        public async Task<IActionResult> EditProfile(Users user)
+        {
+            int? id = HttpContext.Session.GetInt32("UserId");
+            await _userRepo.UpdateUser(user, id);
+            return RedirectToAction("Profile");
+        }
+        #endregion
+
+        [HttpGet("/Logout")]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return Redirect("/");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

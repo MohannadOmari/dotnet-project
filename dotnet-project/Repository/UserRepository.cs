@@ -48,42 +48,57 @@ namespace dotnet_project.Repository
         }
 
         // Get user for login
-        public async Task<bool> GetUser(string email, string password)
+        public async Task<Users?> GetUser(Users user)
         {
-            var query = "SELECT Password FROM Users WHERE Email = @Email AND isActive = 'Yes'";
-            var Email = email;
+            var query = "SELECT * FROM Users WHERE Email = @Email AND isActive = 'Yes'";
+            var Email = user.Email;
             using (var connection = _context.CreateConnection())
             {
-                var user = await connection.QuerySingleOrDefaultAsync<Users>(query, new { Email });
-                var hashedPassword = user.Password;
-                if (user != null)
+                var userLogin = await connection.QuerySingleOrDefaultAsync<Users>(query, new { Email });
+                var hashedPassword = userLogin.Password;
+                if (userLogin != null)
                 {
-                    bool passwordMatch = BCrypt.Net.BCrypt.Verify(password, hashedPassword);
+                    bool passwordMatch = BCrypt.Net.BCrypt.Verify(user.Password, hashedPassword);
                     if (passwordMatch)
                     {
-                        return true;
+                        return userLogin;
                     }
                     else
                     {
-                        return false;
+                        return null;
                     }
                 }
                 else
                 {
-                    return false;
+                    return null;
                 }
             }
 
         }
 
-        public Task GetUserById(int id)
+        public async Task<Users> GetUserById(int id)
         {
-            throw new NotImplementedException();
+            var query = "SELECT * FROM Users WHERE Id = @id";
+            using(var connection = _context.CreateConnection())
+            {
+                var user = await connection.QuerySingleOrDefaultAsync<Users>(query, new { id });
+                return user;
+            }
         }
 
-        public Task UpdateUser(Users user)
+        public async Task UpdateUser(Users user, int? id)
         {
-            throw new NotImplementedException();
+            var query = "UPDATE Users SET FullName = @FullName, Email = @Email, Address = @Address, UpdatedAt = @UpdatedAt WHERE Id = @Id";
+            using (var connection = _context.CreateConnection())
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("FullName", user.FullName);
+                parameters.Add("Email", user.Email);
+                parameters.Add("Address", user.Address);
+                parameters.Add("UpdatedAt", DateTime.Now);
+                parameters.Add("Id", id);
+                await connection.ExecuteAsync(query, parameters);
+            }
         }
     }
 }

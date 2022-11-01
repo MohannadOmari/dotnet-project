@@ -4,6 +4,7 @@ using dotnet_project.Models;
 
 namespace dotnet_project.Controllers;
 
+
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
@@ -15,6 +16,8 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        ViewBag.userId = HttpContext.Session.GetInt32("UserId");
+        ViewBag.userType = HttpContext.Session.GetInt32("UserType");
         return View();
     }
 

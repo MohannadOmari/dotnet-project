@@ -30,6 +30,8 @@ public class ProductController : Controller
     {
         try
         {
+            ViewBag.userId = HttpContext.Session.GetInt32("UserId");
+            ViewBag.userType = HttpContext.Session.GetInt32("UserType");
             var products = await _productRepo.GetProducts();
             return View(products);
         }
@@ -66,6 +68,8 @@ public class ProductController : Controller
     {
         try
         {
+            ViewBag.userId = HttpContext.Session.GetInt32("UserId");
+            ViewBag.userType = HttpContext.Session.GetInt32("UserType");
             var product = await _productRepo.GetProductById(id);
             if (product == null){return NotFound();}
             return View(product);

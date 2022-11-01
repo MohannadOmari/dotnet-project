@@ -13,7 +13,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
-    options.Cookie.Name = "eShop User session";
+    options.Cookie.Name = ".eShop.Session";
     options.IdleTimeout = TimeSpan.FromSeconds(259200);
     options.Cookie.IsEssential = true;
 });
