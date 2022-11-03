@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Permissions;
 using System.Threading.Tasks;
 using Dapper;
 using dotnet_project.Models;
 using dotnet_project.Repository.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
 
@@ -42,6 +45,7 @@ public class ProductController : Controller
     }
 
     [HttpGet("AddProduct")]
+    [SecurityCheckAttribute]
     public IActionResult AddProduct()
     {
         return View();
@@ -49,6 +53,7 @@ public class ProductController : Controller
 
     [HttpPost("AddProduct")]
     [ValidateAntiForgeryToken]
+    [SecurityCheckAttribute]
     public async Task<IActionResult> AddProduct(Products product)
     {
         try
@@ -85,4 +90,47 @@ public class ProductController : Controller
             return StatusCode(500, ex.Message);
         }
     }
+
+    #region Method SecurityCheckAttribute
+    /*
+    Checking if user is logged in and a seller
+    */
+    [AttributeUsageAttribute(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
+
+    public class SecurityCheckAttribute : ActionFilterAttribute, IActionFilter
+    {
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            var controller = context.Controller as ProductController;
+            var httpContext = controller.HttpContext;
+
+            if (httpContext.Session.GetInt32("UserType") != null)
+            {
+                var userType = httpContext.Session.GetInt32("UserType");
+                if (userType != 2)
+                {
+                    controller.TempData["error"] = "Unauthorized Access please login as seller";
+                    context.Result = new RedirectToRouteResult(
+                        new RouteValueDictionary
+                        {
+                            { "Controller", "Home" },
+                            { "Action", "Index" },
+                        });
+                    base.OnActionExecuting(context);
+                }
+            }
+            else
+            {
+                controller.TempData["error"] = "Unauthorized Access please login";
+                context.Result = new RedirectToRouteResult(
+                        new RouteValueDictionary
+                        {
+                            { "Controller", "User" },
+                            { "Action", "Login" },
+                        });
+                base.OnActionExecuting(context);
+            }
+        }
+    }
+    #endregion
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using dotnet_project.Models;
 using dotnet_project.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 
 namespace dotnet_project.Controllers
@@ -91,6 +92,7 @@ namespace dotnet_project.Controllers
 
         #region Profile
         [HttpGet("/Profile")]
+        [SecurityCheckAttribute]
         public async Task<IActionResult> Profile()
         {
             ViewBag.userId = HttpContext.Session.GetInt32("UserId");
@@ -101,6 +103,7 @@ namespace dotnet_project.Controllers
         }
 
         [HttpGet("Profile/Edit")]
+        [SecurityCheckAttribute]
         public IActionResult EditProfile()
         {
             ViewBag.userId = HttpContext.Session.GetInt32("UserId");
@@ -109,6 +112,7 @@ namespace dotnet_project.Controllers
         }
 
         [HttpPost("Profile/Edit")]
+        [SecurityCheckAttribute]
         public async Task<IActionResult> EditProfile(Users user)
         {
             if (!ModelState.IsValid)
@@ -123,6 +127,7 @@ namespace dotnet_project.Controllers
         #endregion
 
         [HttpGet("/Logout")]
+        [SecurityCheckAttribute]
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
@@ -134,5 +139,38 @@ namespace dotnet_project.Controllers
         {
             return View("Error!");
         }
+
+
+        #region Method SecurityCheckAttribute
+        /*
+        Security check for authorization
+        if user not logged in route them to logging in page
+        */
+        [AttributeUsageAttribute(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
+
+        public class SecurityCheckAttribute : ActionFilterAttribute, IActionFilter
+        {
+            public override void OnActionExecuting(ActionExecutingContext context)
+            {
+                var controller = context.Controller as UserController;
+                var httpContext = controller.HttpContext;
+
+                if (httpContext.Session.GetInt32("UserId") == null)
+                {
+                    
+                    controller.TempData["error"] = "Unauthorized Access please login";
+                    context.Result = new RedirectToRouteResult(
+                            new RouteValueDictionary
+                            {
+                            { "Controller", "User" },
+                            { "Action", "Login" },
+                            });
+                    base.OnActionExecuting(context);
+                }
+
+                base.OnActionExecuting(context);
+            }
+        }
+        #endregion
     }
 }

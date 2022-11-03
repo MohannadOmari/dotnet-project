@@ -35,6 +35,12 @@
                             <a class="nav-link" asp-controller="User" asp-action="Profile">Profile</a>
                         </li>
                         }
+                        @if (ViewBag.userType == 2)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Product" asp-action="AddProduct">Add Product</a>
+                            </li>
+                        }
                         @* <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">Shop</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
