@@ -58,5 +58,30 @@ namespace dotnet_project.Repository
             }
 
         }
+
+        public async Task UpdateProduct(Products product, int Id)
+        {
+            var query = "UPDATE Products SET ProductName = @ProductName, Quantity = @Quantity, Price = @Price, ProductDescription = @ProductDescription";
+            using (var connection = _context.CreateConnection())
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("ProductName", product.ProductName);
+                parameters.Add("Quantity", product.Quantity);
+                parameters.Add("Price", product.Price);
+                parameters.Add("ProductDescription", product.ProductDescription);
+
+                await connection.ExecuteAsync(query, parameters);
+            }
+        }
+
+        public async Task<bool> GetProductByUserId(int productId, int userId)
+        {
+            var query = "SELECT * FROM Products WHERE SellerId = @userId AND Id = @productId";
+            using(var connection = _context.CreateConnection())
+            {
+                bool productExists = await connection.QuerySingleOrDefaultAsync<bool>(query, new { userId, productId });
+                return productExists;
+            }
+        }
     }
 }

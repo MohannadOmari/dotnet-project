@@ -48,6 +48,8 @@ public class ProductController : Controller
     [SecurityCheckAttribute]
     public IActionResult AddProduct()
     {
+        ViewBag.userId = HttpContext.Session.GetInt32("UserId");
+        ViewBag.userType = HttpContext.Session.GetInt32("UserType");
         return View();
     }
 
@@ -67,11 +69,11 @@ public class ProductController : Controller
             }
             return View(product);
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             return StatusCode(500, ex.Message);
         }
-        
+
     }
 
     [HttpGet("{Id}")]
@@ -82,12 +84,48 @@ public class ProductController : Controller
             ViewBag.userId = HttpContext.Session.GetInt32("UserId");
             ViewBag.userType = HttpContext.Session.GetInt32("UserType");
             var product = await _productRepo.GetProductById(id);
-            if (product == null){return NotFound();}
+            if (product == null) { return NotFound(); }
             return View(product);
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             return StatusCode(500, ex.Message);
+        }
+    }
+
+    [HttpGet("{Id}/UpdateProduct")]
+    [SecurityCheckAttribute]
+    public async Task<IActionResult> UpdateProduct(int id)
+    {
+        var userId = HttpContext.Session.GetInt32("UserId");
+        ViewBag.userId = userId;
+        ViewBag.userType = HttpContext.Session.GetInt32("UserType");
+
+        bool productExists = await _productRepo.GetProductByUserId(id, (int)userId);
+        if (productExists)
+        {
+            return View();
+        }
+        else
+        {
+            TempData["error"] = "Unauthorized access! this is not your product";
+            return RedirectToAction("Index");
+        }
+    }
+
+    [HttpPost("UpdateProduct")]
+    [SecurityCheckAttribute]
+    public async Task<IActionResult> UpdateProduct(Products product, int id)
+    {
+        if (ModelState.IsValid)
+        {
+            await _productRepo.UpdateProduct(product, id);
+            TempData["success"] = "Product Updated Successfully";
+            return RedirectToAction("Index");
+        }
+        else
+        {
+            return View(product);
         }
     }
 
@@ -109,7 +147,7 @@ public class ProductController : Controller
                 var userType = httpContext.Session.GetInt32("UserType");
                 if (userType != 2)
                 {
-                    controller.TempData["error"] = "Unauthorized Access please login as seller";
+                    controller.TempData["error"] = "Unauthorized Access! please login as seller";
                     context.Result = new RedirectToRouteResult(
                         new RouteValueDictionary
                         {
@@ -121,7 +159,7 @@ public class ProductController : Controller
             }
             else
             {
-                controller.TempData["error"] = "Unauthorized Access please login";
+                controller.TempData["error"] = "Unauthorized! Access please login";
                 context.Result = new RedirectToRouteResult(
                         new RouteValueDictionary
                         {
@@ -133,4 +171,5 @@ public class ProductController : Controller
         }
     }
     #endregion
+
 }
