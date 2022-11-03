@@ -44,10 +44,12 @@ namespace dotnet_project.Controllers
                     HttpContext.Session.SetInt32("UserId", loggedIn.Id);
                     HttpContext.Session.SetInt32("UserType", loggedIn.UserTypeId);
                     await HttpContext.Session.CommitAsync();
+                    TempData["success"] = "Logged in succesfully";
                     return Redirect("/");
                 }
                 else
                 {
+                    TempData["error"] = "Login information incorrect";
                     return View();
                 }
             }
@@ -73,8 +75,12 @@ namespace dotnet_project.Controllers
         {
             try
             {
-                await _userRepo.AddUser(user);
-                return RedirectToAction("Login");
+                if (ModelState.IsValid)
+                {
+                    await _userRepo.AddUser(user);
+                    return RedirectToAction("Login");
+                }
+                return View(user);
             }
             catch(Exception ex)
             {
@@ -105,8 +111,13 @@ namespace dotnet_project.Controllers
         [HttpPost("Profile/Edit")]
         public async Task<IActionResult> EditProfile(Users user)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(user);
+            }
             int? id = HttpContext.Session.GetInt32("UserId");
             await _userRepo.UpdateUser(user, id);
+            TempData["success"] = "Profile updated successfully";
             return RedirectToAction("Profile");
         }
         #endregion

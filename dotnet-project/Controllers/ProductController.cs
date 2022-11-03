@@ -53,8 +53,14 @@ public class ProductController : Controller
     {
         try
         {
-            await _productRepo.AddProduct(product);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                product.SellerId = (int)HttpContext.Session.GetInt32("UserId");
+                await _productRepo.AddProduct(product);
+                TempData["success"] = "Product added succesfully";
+                return RedirectToAction("Index");
+            }
+            return View(product);
         }
         catch(Exception ex)
         {

@@ -4,6 +4,8 @@
  Layout = "~/Views/Shared/_LayoutWithoutHeader.cshtml";
 }
 
+<partial name="_Notifications" />
+
 <div id="containers" class="container mt-5 w-25 bg-white">
     <h2 id="heading" class="text-center text-grey">Login</h2>
     
@@ -11,6 +13,7 @@
         <div class="">
             <label asp-for="Email">Email</label>
             <input asp-for="Email" class="form-control"/>
+            <span asp-validation-for="Email" class="text-danger"></span>
         </div>
 
         <div class="align-items-center password-container">
@@ -27,7 +30,8 @@
     </form>
 </div>
 
-
-
-
-
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

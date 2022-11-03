@@ -9,16 +9,19 @@
 		<div class="align-items-center">
             <label asp-for="FullName" class="">Full Name</label>
 			<input asp-for="FullName" class="form-control"/>
+			<span asp-validation-for="FullName" class="text-danger"></span>
 		</div>
 
 		<div class="align-items-center">
             <label asp-for="Email">Email</label>
 			<input asp-for="Email" class="form-control"/>
+			<span asp-validation-for="Email" class="text-danger"></span>
 		</div>
 
 		<div class="align-items-center">
             <label asp-for="Password">Password</label>
 			<input asp-for="Password" class="form-control" type="password"/>
+			<span asp-validation-for="Password" class="text-danger"></span>
 		</div>
 
 		<div class="align-items-center">
@@ -30,18 +33,21 @@
                     <option value="Female">Female</option>
                     <option value="Undisclosed">Rather not disclose</option>
                 </select>
+				<span asp-validation-for="Gender" class="text-danger"></span>
 			</div>
 		</div>
         <div class="align-items-center">
 			<div class="">
                 <label asp-for="Address">Address</label>
 			    <input asp-for="Address" class="form-control"/>
+				<span asp-validation-for="Address" class="text-danger"></span>
 			</div>
 		</div>
         <div class="align-items-center">
 			<div class="">
                 <label asp-for="BirthDate">Birth Date</label>
 			    <input asp-for="BirthDate" class="form-control" type="date"/>
+				<span asp-validation-for="BirthDate" class="text-danger"></span>
 			</div>
 		</div>
         <div class="align-items-center">
@@ -52,6 +58,7 @@
                     <option value="1">Buyer</option>
                     <option value="2">Seller</option>
                 </select>
+				<span asp-validation-for="UserTypeId" class="text-danger"></span>
 			</div>
 		</div>
 		<div id="submit-button" class="text-center">
@@ -59,3 +66,7 @@
 		</div>
 	</form>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
