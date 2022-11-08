@@ -38,9 +38,9 @@
     </dl>
 </div>
 <div>
-    @if (ViewBag.userType == 2)
+    @if (ViewBag.userType == 2 && ViewBag.sellerProduct)
     {
-        <a asp-controller="Product" asp-action="@Model.Id/UpdateProduct" class="btn btn-success">Update</a>
+        <a asp-controller="Product" asp-action="UpdateProduct" asp-route-id="@Model.Id" class="btn btn-success">Update</a>
     }
     <a asp-action="Index" class="btn btn-info">Back to Products</a>
 </div>

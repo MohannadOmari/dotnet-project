@@ -61,7 +61,7 @@ namespace dotnet_project.Repository
 
         public async Task UpdateProduct(Products product, int Id)
         {
-            var query = "UPDATE Products SET ProductName = @ProductName, Quantity = @Quantity, Price = @Price, ProductDescription = @ProductDescription";
+            var query = "UPDATE Products SET ProductName = @ProductName, Quantity = @Quantity, Price = @Price, ProductDescription = @ProductDescription WHERE Id = @Id";
             using (var connection = _context.CreateConnection())
             {
                 var parameters = new DynamicParameters();
@@ -69,6 +69,7 @@ namespace dotnet_project.Repository
                 parameters.Add("Quantity", product.Quantity);
                 parameters.Add("Price", product.Price);
                 parameters.Add("ProductDescription", product.ProductDescription);
+                parameters.Add("Id", Id);
 
                 await connection.ExecuteAsync(query, parameters);
             }

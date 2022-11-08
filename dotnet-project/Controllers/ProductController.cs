@@ -85,6 +85,8 @@ public class ProductController : Controller
             ViewBag.userType = HttpContext.Session.GetInt32("UserType");
             var product = await _productRepo.GetProductById(id);
             if (product == null) { return NotFound(); }
+            bool sellerProduct = HttpContext.Session.GetInt32("UserId") == product.SellerId;
+            if (sellerProduct) { ViewBag.sellerProduct = true; } else { ViewBag.sellerProduct = false; }
             return View(product);
         }
         catch (Exception ex)
@@ -93,7 +95,7 @@ public class ProductController : Controller
         }
     }
 
-    [HttpGet("{Id}/UpdateProduct")]
+    [HttpGet("UpdateProduct/{Id}")]
     [SecurityCheckAttribute]
     public async Task<IActionResult> UpdateProduct(int id)
     {
@@ -113,7 +115,7 @@ public class ProductController : Controller
         }
     }
 
-    [HttpPost("UpdateProduct")]
+    [HttpPost("UpdateProduct/{Id}")]
     [SecurityCheckAttribute]
     public async Task<IActionResult> UpdateProduct(Products product, int id)
     {
